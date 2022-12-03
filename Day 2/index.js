@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-function readFile(){
+function readFile() {
     var data = fs.readFileSync(__dirname+'/data.txt', 'utf8');
     parseData(data);
 }
@@ -17,7 +17,7 @@ function parseData(data) {
     ChallengePart1(data);
 }
 
-function ChallengePart1(data){
+function ChallengePart1(data) {
     var totalScore = 0;
 
     for (let game of data) {
@@ -41,7 +41,6 @@ function ChallengePart2(data){
 
     for (let game of data) {
 
-
         var opponentMove = convertLetter(game[0]);
         var result = convertLetter2(game[1]);
         var myMove = calculateMyMove(opponentMove, result);
@@ -54,32 +53,32 @@ function ChallengePart2(data){
 
 }
 
-function convertLetter(a){
+function convertLetter(a) {
     if (a === 'A' || a === 'X') return 'rock';
     else if (a === 'B' || a === 'Y') return 'paper';
     return 'scissors';
 }
 
-function convertLetter2(a){
+function convertLetter2(a) {
     if (a === 'X') return 'lose';
-    else if (a === 'Y') return 'draw';
+    if (a === 'Y') return 'draw';
     return 'win';
 }
 
-function calculateWin(a, b){
+function calculateWin(a, b) {
     //a = oppenent, b = me
     if (a === b) return 'draw';
-    else if (a === 'rock' && b === 'scissors') return 'lose';
-    else if (a === 'scissors' && b === 'paper') return 'lose';
-    else if (a === 'paper' && b === 'rock') return 'lose';
-    else return 'win';
+    if (a === 'rock' && b === 'scissors') return 'lose';
+    if (a === 'scissors' && b === 'paper') return 'lose';
+    if (a === 'paper' && b === 'rock') return 'lose';
+    return 'win';
 }
 
 function calculateMyMove(opponentMove, desiredResult) {
     if (desiredResult === 'draw') return opponentMove;
     if (calculateWin(opponentMove, 'rock') === desiredResult) return 'rock';
     if (calculateWin(opponentMove, 'scissors') === desiredResult) return 'scissors';
-    if (calculateWin(opponentMove, 'paper') === desiredResult) return 'paper';
+    return 'paper';
     
 }
 
