@@ -83,34 +83,32 @@ function MapSystem(lines) {
 
 }
 
-
-
-var challenge1Vals = [];
-
-function getDirSizeRecursive(dirRef){
-
-    dirRef.fileSize = 0;
-
-    for (let file of dirRef.files) {
-        var fileSize = parseInt(file.split(' ')[0]);
-        dirRef.fileSize += fileSize;
-    }
-
-    for (let dir in dirRef.subdirs) {
-            var subdirottal = getDirSizeRecursive(dirRef.subdirs[dir]);
-            dirRef.fileSize += subdirottal;
-    }
-
-    if (dirRef.fileSize <= 100000) challenge1Vals.push(dirRef.fileSize);
-
-    return dirRef.fileSize;
-
-}
-
 function ChallengePart1(sys){
 
+    var challenge1Vals = [];
+
+    function getDirSizeRecursive(dirRef){
+
+        dirRef.fileSize = 0;
+
+        for (let file of dirRef.files) {
+            var fileSize = parseInt(file.split(' ')[0]);
+            dirRef.fileSize += fileSize;
+        }
+
+        for (let dir in dirRef.subdirs) {
+                var subdirottal = getDirSizeRecursive(dirRef.subdirs[dir]);
+                dirRef.fileSize += subdirottal;
+        }
+
+        if (dirRef.fileSize <= 100000) challenge1Vals.push(dirRef.fileSize);
+
+        return dirRef.fileSize;
+
+    }
+
     getDirSizeRecursive(sys['/']);
-    
+
     var solution = 0;
 
     challenge1Vals.forEach(x=> {solution += x});
